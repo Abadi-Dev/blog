@@ -17,6 +17,7 @@ app.use(express.static("public"));
 
 app.get("/", function(req, res){
   res.render("home.ejs",{ homeStartingContent: homeStartingContent});
+  console.log(posts);
 });
 
 app.get("/about", function(req, res){
@@ -31,9 +32,16 @@ app.get("/compose", function(req, res){
   res.render("compose.ejs");
 });
 
+// array to have the posts.
+ let posts = [];
+
 app.post("/compose", function(req, res){
-  console.log(req.body.newPost);
-//  res.redirect("/compose");
+  const post = {
+    title:   req.body.postTitle,
+    content: req.body.postContent 
+  }
+  posts.push(post);
+  res.redirect("/");
 });
 
 
